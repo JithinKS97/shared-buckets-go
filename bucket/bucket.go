@@ -6,13 +6,13 @@ type Bucket struct {
 	Seed string
 }
 
-func createBucket() {
+func CreateBucket() {
 	seed := createAccount()
 	bucket := Bucket{seed}
 	saveToFile(bucket)
 }
 
-func start() {
+func Start() {
 	bucket := readFromFile()
 	fmt.Printf("%v", bucket)
 }

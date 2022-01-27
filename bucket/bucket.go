@@ -25,7 +25,6 @@ func Start() {
 }
 
 func createClientFromSeed(seed string) *nkn.Client {
-	// Seed obtained from
 	seedByte, _ := hex.DecodeString(seed)
 	account, _ := nkn.NewAccount(seedByte)
 	client, _ := nkn.NewClient(account, "", nil)
@@ -38,27 +37,18 @@ func createClientFromSeed(seed string) *nkn.Client {
 func createClient() *nkn.Client {
 	account, _ := nkn.NewAccount(nil)
 	client, _ := nkn.NewClient(account, "", nil)
+	<-client.OnConnect.C
+	fmt.Println("Connected to RPC")
 	return client
 }
 
-func handleMessage(client *nkn.Client) <-chan string {
-
-	r := make(chan string)
-
-	go func() {
-		defer close(r)
-		msg := <-client.OnMessage.C
-		println("handle message func")
-		println("Message")
-		fmt.Println(msg.Data)
-	}()
-
-	return r
+func handleMessage(client *nkn.Client) {
+	msg := <-client.OnMessage.C
+	fmt.Println(string(msg.Data))
 }
 
 func Connect(address string) {
 	client := createClient()
-	print(address)
-	client.Send(nkn.NewStringArray(address), []byte("hello world!"), nil)
+	client.Send(nkn.NewStringArray(address), []byte("hello world! WTF"), nil)
 	handleMessage(client)
 }

@@ -12,5 +12,8 @@ func executeCommand() {
 		bucket.CreateBucket()
 	case "start":
 		bucket.Start()
+	case "connect":
+		address := os.Args[2]
+		bucket.Connect(address)
 	}
 }

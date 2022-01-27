@@ -1,4 +1,4 @@
-package main
+package bucket
 
 import (
 	"encoding/hex"
@@ -7,7 +7,7 @@ import (
 	nkn "github.com/nknorg/nkn-sdk-go"
 )
 
-func CreateAccount() string {
+func createAccount() string {
 	account, err := nkn.NewAccount(nil)
 	if err != nil {
 		fmt.Println(

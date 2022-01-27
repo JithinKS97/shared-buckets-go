@@ -1,19 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"os"
+	"shared-buckets/bucket"
 )
 
 func executeCommand() {
 	command := os.Args[1]
 	switch command {
 	case "create":
-		seed := CreateAccount()
-		bucket := createBucket(seed)
-		saveToFile(bucket)
+		bucket.CreateBucket()
 	case "start":
-		bucket := readFromFile()
-		fmt.Println(bucket)
+		bucket.Start()
 	}
 }
